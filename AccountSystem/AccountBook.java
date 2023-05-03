@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class AccountBook {
 
     final String FILENAME = "accounts.txt";
-    HashMap<String, String> book = new HashMap<String, String>();
+    private HashMap<String, String> book = new HashMap<String, String>();
 
     // Constructors
     public AccountBook() {
@@ -91,5 +91,22 @@ public class AccountBook {
             book.put(email, password);
         }
         updateAccountFile();
+    }
+
+    public boolean isAccountReal(String email) {
+        if(book.containsKey(email)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPasswordCorrect(String email, String password) {
+        if(!isAccountReal(email)) {
+            return false;
+        }
+        if(!(book.get(email).equals(password))) {
+            return false;
+        }
+        return true;
     }
 }
